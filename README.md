@@ -1,2 +1,0 @@
-# Kaggle
-training for Kaggle
