@@ -25,8 +25,8 @@ classes = ('plane', 'car', 'bird', 'cat','deer', 'dog', 'frog', 'horse', 'ship',
 
 # os.environ['TORCH_HOME'] = 'D:/OtherInstall/pytorch_models'
 # model = torchvision.models.resnet152(pretrained=True)
-model = torchvision.models.vgg19_bn(pretrained=True)
-torchvision.models.inception_v3(pretrained=True)
+# model = torchvision.models.vgg19_bn(pretrained=True)
+model = torchvision.models.inception_v3(pretrained=True)
 
 
 # for param in model.parameters():

@@ -1,0 +1,15 @@
+# logging  输出日志到 文件 和 控制台
+import logging
+logger = logging.getLogger("czj")
+logger.setLevel("INFO")
+BASIC_FORMAT = "%(asctime)s:%(levelname)s:%(message)s"
+DATE_FORMAT = '%Y-%m-%d %H:%M:%S'
+formatter = logging.Formatter(BASIC_FORMAT, DATE_FORMAT)
+chlr = logging.StreamHandler()
+chlr.setFormatter(formatter)
+chlr.setLevel("INFO")
+fhlr = logging.FileHandler(path+"radio.log")
+fhlr.setFormatter(formatter)
+fhlr.setLevel("INFO")
+logger.addHandler(chlr)
+logger.addHandler(fhlr)
