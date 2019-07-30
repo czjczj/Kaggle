@@ -26,7 +26,7 @@ classes = ('plane', 'car', 'bird', 'cat','deer', 'dog', 'frog', 'horse', 'ship',
 # os.environ['TORCH_HOME'] = 'D:/OtherInstall/pytorch_models'
 # model = torchvision.models.resnet152(pretrained=True)
 # model = torchvision.models.vgg19_bn(pretrained=True)
-model = torchvision.models.inception_v3(pretrained=True)
+model = torchvision.models.densenet161(pretrained=True)
 
 
 # for param in model.parameters():
@@ -34,7 +34,7 @@ model = torchvision.models.inception_v3(pretrained=True)
 model.add_module("fc", nn.Linear(2048,10))
 
 if torch.cuda.is_available():
-    device = 'cuda:3'
+    device = 'cuda:0'
 else:
     device = 'cpu'
 
