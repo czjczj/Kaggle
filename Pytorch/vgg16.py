@@ -11,11 +11,11 @@ import torch.nn as nn
 import os
 import torchvision
 import torchvision.transforms as transforms
-transform = transforms.Compose([transforms.ToTensor(),transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
-# path = "D:/MyInstallData/PyCharm/Kaggle/Pytorch/data"
-path = "./data"
+transform = transforms.Compose([transforms.ToTensor(),transforms.Normalize((0, 0, 0), (1, 1, 1))])
+path = "D:/MyInstallData/PyCharm/Kaggle/Pytorch/data"
+# path = "./data"
 
-batch_size = 500
+batch_size = 4
 trainset = torchvision.datasets.CIFAR10(root=path, train=True,download=True, transform=transform)
 trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size,shuffle=True, num_workers=2)
 testset = torchvision.datasets.CIFAR10(root=path, train=False,download=True, transform=transform)
@@ -26,11 +26,8 @@ classes = ('plane', 'car', 'bird', 'cat','deer', 'dog', 'frog', 'horse', 'ship',
 # os.environ['TORCH_HOME'] = 'D:/OtherInstall/pytorch_models'
 # model = torchvision.models.resnet152(pretrained=True)
 # model = torchvision.models.vgg19_bn(pretrained=True)
-model = torchvision.models.densenet161(pretrained=True)
+model = torchvision.models.vgg11_bn()
 
-
-# for param in model.parameters():
-#     param.requires_grad = False
 model.add_module("fc", nn.Linear(2048,10))
 
 if torch.cuda.is_available():
@@ -63,6 +60,8 @@ for e in range(n_epoch):
         images = torch.FloatTensor(images).to(device)
         labels = torch.LongTensor(labels).to(device)
 
+        # print(images[0])
+
         optimizer.zero_grad()
         outputs = model(images)
         # print(outputs.requires_grad)
@@ -78,5 +77,9 @@ for e in range(n_epoch):
             print("E:%d, B:%d, Test acc:%.4f"%(e, (i+1), test_acc))
 
 
+import torch as t
+import numpy as np
+a = t.FloatTensor(np.arange(12).reshape(3,4))
+b = t.nn.BatchNorm1d(4, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
 
 

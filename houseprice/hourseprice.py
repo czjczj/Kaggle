@@ -20,7 +20,9 @@ test = pd.read_csv(test_path, sep=',',  index_col=0)
 # salePrice  数据平滑  x-> log(x+1)  逆操作 x->exp(x)+1
 # price = pd.DataFrame({'price':train.SalePrice, 'log(price+1)':np.log(train.SalePrice + 1)})
 # price.hist()
-y_train = np.log1p(train.SalePrice)
+y_train = np.log1p(train.pop('SalePrice'))
+df = pd.concat([train, test], axis=0)
+df['MSSubClass'] = df['MSSubClass'].astype(str)
 
-from sklearn.manifold import TSNE
-
+mss = pd.get_dummies(df['MSSubClass'], prefix='MSSubClass')
+pd.concat([df, mss], axis=1)
